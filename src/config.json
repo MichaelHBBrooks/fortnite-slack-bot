@@ -1,0 +1,13 @@
+{
+	"slack": {
+		"name": "fortnite-helper-bot",
+		"channel": "fortnite"
+	},
+	"fortnite": {
+		"colors": {
+			"legendary": "#BF4F00",
+			"epic": "#762DD3",
+			"vbucks": "#7598A6"
+		}
+	}
+}

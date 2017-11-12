@@ -1,33 +1,47 @@
 /**
  * fortnite-helper-bot
- * Token: xoxb-249002785873-1qrDiDgdxwLSNpiBJ08ezpl5
  * more information about additional params https://api.slack.com/methods/chat.postMessage
  */
 
+const config = require("./config.json");
+
 var SlackBot = require("slackbots");
 
-module.exports = function(weather) {
-    const bot = new SlackBot({
-        token: "xoxb-249002785873-1qrDiDgdxwLSNpiBJ08ezpl5",
-        name: "fortnite-helper-bot"
-    });
+// module.exports = function(message, attachments) {
+//     const bot = new SlackBot({
+//         token: config.slack.api_token,
+//         name: config.slack.name
+//     });
 
-    bot.on("start", () => {
-        var params = {
-            icon_emoji: ":cat:"
+//     const epochTime = Math.floor(new Date().getTime() / 1000);
+//     const params = {
+//         as_user: true,
+//         attachments: attachments
+//     };
+//     bot.postMessageToUser("jinieren", "*This only a test.*\n" + message, params);
+//     // bot.postMessageToChannel(
+//     //     "fortnite",
+//     //     "*This only a test.*\n" + message,
+//     //     params
+//     // );
+// };
+
+module.exports = class FortniteBot {
+    constructor(name, token, channel) {
+        this.name = name;
+        this.token = token;
+        this.channel = channel;
+        this.bot = new SlackBot({
+            token: token,
+            name: name
+        });
+    }
+
+    postMessage(message, attachments) {
+        const params = {
+            as_user: true,
+            attachments: attachments
         };
-
-        // define channel, where bot exist. You can adjust it there https://my.slack.com/services
-        // bot.postMessageToChannel("general", "meow!", params);
-
-        // define existing username instead of 'user_name'
-        bot.postMessageToUser("jinieren", "This is a test.", params);
-
-        // If you add a 'slackbot' property,
-        // you will post to another user's slackbot channel instead of a direct message
-        // bot.postMessageToUser("user_name", "meow!", { slackbot: true, icon_emoji: ":cat:" });
-
-        // define private group instead of 'private_group', where bot exist
-        // bot.postMessageToGroup("private_group", "meow!", params);
-    });
+        this.bot.postMessageToUser("jinieren", message, params);
+    }
 }

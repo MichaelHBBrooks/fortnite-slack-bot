@@ -1,3 +1,4 @@
+"use strict";
 /**
  * fortnite-helper-bot
  * more information about additional params https://api.slack.com/methods/chat.postMessage
@@ -38,10 +39,27 @@ module.exports = class FortniteBot {
     }
 
     postMessage(message, attachments) {
+        if (typeof config.slack === "undefined") {
+            throw "no 'slack' section defined in config file";
+        } else if (typeof config.slack.recipients === "undefined") {
+            throw "no recipients defined in config file";
+        }
+
         const params = {
             as_user: true,
             attachments: attachments
         };
-        this.bot.postMessageToUser("jinieren", message, params);
+        let users = config.slack.recipients.users;
+        if (typeof users !== "undefined") {
+            for (let x = 0; x < users.length; x++) {
+                this.bot.postMessageToUser(users[x], message, params);
+            }
+        }
+        let channels = config.slack.recipients.channels;
+        if (typeof channels !== "undefined") {
+            for (let x = 0; x < channels.length; x++) {
+                this.bot.postMessageToChannel(channels[x], message, params);
+            }
+        }
     }
-}
+};

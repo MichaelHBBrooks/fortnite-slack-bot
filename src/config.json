@@ -1,13 +1,33 @@
 {
-	"slack": {
-		"name": "fortnite-helper-bot",
-		"channel": "fortnite"
-	},
-	"fortnite": {
-		"colors": {
-			"legendary": "#BF4F00",
-			"epic": "#762DD3",
-			"vbucks": "#7598A6"
-		}
-	}
+    "slack": {
+        "name": "fortnite-helper-bot",
+        "recipients": {
+            "users": ["jinieren"],
+            "channels": ["fortnite"]
+        }
+    },
+    "fortnite": {
+        "searchItems": [
+            {
+                "name": "Legendary",
+                "searchString": "(Legendary)",
+                "color": "#BF4F00"
+            },
+            {
+                "name": "Epic",
+                "searchString": "(Epic)",
+                "color": "#762DD3"
+            },
+            {
+                "name": "vBucks",
+                "searchString": "vBucks",
+                "color": "#7598A6"
+            }
+        ],
+        "colors": {
+            "legendary": "#BF4F00",
+            "epic": "#762DD3",
+            "vbucks": "#7598A6"
+        }
+    }
 }
